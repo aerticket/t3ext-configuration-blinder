@@ -11,5 +11,10 @@
     "psr-4": {
       "Aerticket\\ConfigurationBlinder\\": "Classes/"
     }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "configuration_blinder"
+    }
   }
 }
