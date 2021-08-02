@@ -2,6 +2,7 @@
   "name": "aerticket/configuration-blinder",
   "description": "Hide confidential configuration values from backend users",
   "type": "typo3-cms-extension",
+  "version": "1.0.1",
   "license": "GPL-3.0-or-later",
   "keywords": ["typo3", "TYPO3 CMS", "security", "configuration"],
   "require": {
