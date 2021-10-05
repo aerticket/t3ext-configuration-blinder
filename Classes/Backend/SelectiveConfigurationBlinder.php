@@ -20,14 +20,14 @@ use TYPO3\CMS\Lowlevel\Controller\ConfigurationController;
 class SelectiveConfigurationBlinder
 {
     /**
-     * @param array $blindedConfigurationOptions
+     * @param array<mixed> $blindedConfigurationOptions
      * @param ConfigurationController $configurationController
-     * @return array
+     * @return array<mixed>
      */
     public function modifyBlindedConfigurationOptions(
         array $blindedConfigurationOptions,
         ConfigurationController $configurationController
-    ) {
+    ): array {
         return array_replace_recursive(
             $blindedConfigurationOptions,
             $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['configuration_blinder']['blindedConfigurationOptions']

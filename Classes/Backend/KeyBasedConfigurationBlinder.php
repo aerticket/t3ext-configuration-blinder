@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Aerticket\ConfigurationBlinder\Backend;
@@ -13,14 +14,14 @@ use TYPO3\CMS\Lowlevel\Controller\ConfigurationController;
 class KeyBasedConfigurationBlinder
 {
     /**
-     * @param array $blindedConfigurationOptions
+     * @param array<mixed> $blindedConfigurationOptions
      * @param ConfigurationController $configurationController
-     * @return array
+     * @return array<mixed>
      */
     public function modifyBlindedConfigurationOptions(
         array $blindedConfigurationOptions,
         ConfigurationController $configurationController
-    ) {
+    ): array {
         if (empty($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['configuration_blinder']['keysToBlind'])) {
             return $blindedConfigurationOptions;
         }
@@ -32,7 +33,7 @@ class KeyBasedConfigurationBlinder
         }
 
         // Actually blind the remaining values in the array
-        array_walk_recursive($filteredArray, function(&$value) {
+        array_walk_recursive($filteredArray, function (&$value) {
             $value = '******';
         });
 
@@ -51,17 +52,17 @@ class KeyBasedConfigurationBlinder
     /**
      * Only keeps non empty arrays or string values to be blinded
      *
-     * @param $input
-     * @return array
+     * @param array<mixed> $input
+     * @return array<mixed>
      */
-    public static function filterArrayRecursive($input)
+    public static function filterArrayRecursive(array $input): array
     {
         foreach ($input as &$value) {
             if (is_array($value)) {
                 $value = self::filterArrayRecursive($value);
             }
         }
-        return array_filter($input, function($value, $key) {
+        return array_filter($input, function ($value, $key) {
             $isNotEmptyArray = is_array($value) && !empty($value) && $key != 'configuration_blinder';
             $isStringValueWithKeyToBlind = is_string($value)
                 && is_string($key)
